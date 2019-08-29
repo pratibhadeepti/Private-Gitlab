@@ -1,0 +1,6 @@
+ 
+#Create static Ip in the region the cluster is located
+$ gcloud beta compute --project=myproject2601 addresses create mycluster --region=europe-west1 --network-tier=PREMIUM
+
+## add 'A' type record set to the domain by Setting the DNS Name to *. with the static ip
+$ helm upgrade --install gitlab gitlab/gitlab --timeout 600 --set global.hosts.domain=mytest.domain.com --set global.hosts.externalIP=35.76.87.134 --set certmanager-issuer.email=$(gcloud config get-value account)
